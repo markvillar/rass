@@ -17,20 +17,52 @@
 
 declare -a ports=(21, 22, 23, 53, 79, 80, 123)
 
-for i in {0..255}; do
+evens=($(seq 0 2 255))
+odds=($(seq 1 2 255))
 
-    for port in ${ports[@]}; do
+for port in ${ports[@]}; do
 
-        nmap -v -sS -Pn -n -p $port 45.33.32.$i
+    for odd in ${odds[@]}; do
+
+        nmap -v -sS -Pn -n -p $port 45.33.32.$odd
 
         sleep 0.1
 
-        nmap -v -sS -Pn -n -p $port 45.33.32.$i
+        nmap -v -sS -Pn -n -p $port 45.33.32.$odd
 
         sleep 0.25
 
     done
 
+    for even in ${evens[@]}; do
+
+        nmap -v -sS -Pn -n -p $port 45.33.32.$even
+
+        sleep 0.1
+
+        nmap -v -sS -Pn -n -p $port 45.33.32.$even
+
+        sleep 0.25
+        
+    done
+
 done
+
+
+# for i in {0..255}; do
+
+#     for port in ${ports[@]}; do
+
+#         nmap -v -sS -Pn -n -p $port 45.33.32.$i
+
+#         sleep 0.1
+
+#         nmap -v -sS -Pn -n -p $port 45.33.32.$i
+
+#         sleep 0.25
+
+#     done
+
+# done
 
 # nmap -v -sS -Pn -n -p [21,22,23,53,79,80,123] 45.33.32.156
