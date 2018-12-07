@@ -15,19 +15,19 @@
 # nmap -p [21,22,23,53,79,80,123] 45.33.32.156 --scan-delay 500
 # nmap -sS -p [21,22,23,53,79,80,123] 45.33.32.156/32
 
-declare -a ports=(21 22 23 53 79 80 123)
+declare -a ports=(21, 22, 23, 53, 79, 80, 123)
 
 for i in {0..255}; do
 
-    for j in ${ports[@]}; do
+    for port in ${ports[@]}; do
 
-        nmap -v -sS -Pn -n -p $j 45.33.32.$i
+        nmap -v -sS -Pn -n -p $port 45.33.32.$i
 
-        sleep 200ms
+        sleep 0.1
 
-        nmap -v -sS -Pn -n -p $j 45.33.32.$i
+        nmap -v -sS -Pn -n -p $port 45.33.32.$i
 
-        sleep 300ms
+        sleep 0.25
 
     done
 
