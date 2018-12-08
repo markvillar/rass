@@ -17,32 +17,22 @@
 
 declare -a ports=(21, 22, 23, 53, 79, 80, 123)
 
+# Define Even IP Addresses
 evens=($(seq 0 2 255))
+# Define Odd IP Addresses
 odds=($(seq 1 2 255))
 
 for port in ${ports[@]}; do
 
     for odd in ${odds[@]}; do
-
-        nmap -v -sS -Pn -n -p $port 45.33.32.$odd
-
-        sleep 0.1
-
-        nmap -v -sS -Pn -n -p $port 45.33.32.$odd
-
-        sleep 0.25
+        
+        nmap -v -sS -p $port 192.168.1.$odd
 
     done
 
     for even in ${evens[@]}; do
 
-        nmap -v -sS -Pn -n -p $port 45.33.32.$even
-
-        sleep 0.1
-
-        nmap -v -sS -Pn -n -p $port 45.33.32.$even
-
-        sleep 0.25
+        nmap -v -sS -p $port 192.168.1.$even
         
     done
 
