@@ -26,13 +26,13 @@ for port in ${ports[@]}; do
 
     for odd in ${odds[@]}; do
         
-        nmap -v -sS -p $port 192.168.1.$odd
+        nmap -v -sS -p $port 45.33.32.$odd
 
     done
 
     for even in ${evens[@]}; do
 
-        nmap -v -sS -p $port 192.168.1.$even
+        nmap -v -sS -p $port 45.33.32.$even
         
     done
 
