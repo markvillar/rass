@@ -51,7 +51,7 @@ for port in ${ports[@]}; do
             echo 45.33.32.$ipTemp PORT: $port
             echo 45.33.32.$ipTemp PORT: $portTemp
 
-            echo BREAK
+            echo "-----------------------------------"
 
             # Add to the ipScanned pool
             ipScanned+=($ipTemp)
