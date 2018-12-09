@@ -45,7 +45,7 @@ for port in ${ports[@]}; do
             ipTemp=$[ip+1]
 
             # Store previous IP and get the next Port for execution
-            portTemp=${ports[$port+1]}
+            portTemp=$[port+1]
 
             # Scan IP+1
             echo 45.33.32.$ipTemp PORT: $port
