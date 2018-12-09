@@ -19,14 +19,7 @@ declare -a ports=(21, 22, 23, 53, 79, 80, 123)
 declare -a ipaddress=($(seq 0 1 255))
 
 scanned=()
-
 temp=0
-
-# Define Even IP Addresses
-evens=($(seq 0 2 255))
-# Define Odd IP Addresses
-odds=($(seq 1 2 255))
-
 
 for ip in ${ipaddress[@]}; do
 
