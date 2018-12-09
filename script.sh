@@ -22,7 +22,7 @@ ipScanned=()
 ipTemp=0
 
 portScanned=()
-portTemp=0
+portTemp=${ports[1]}
 
 for port in ${ports[@]}; do
 
@@ -32,6 +32,7 @@ for port in ${ports[@]}; do
         then
             # Scan IP
             echo 45.33.32.$ip PORT: $port
+            echo 45.33.32.$ip PORT: $portTemp
 
             # Add to the ipScanned pool
             ipScanned+=($ip)
@@ -46,7 +47,10 @@ for port in ${ports[@]}; do
             portTemp=${ports[$port+1]}
 
             # Scan IP+1
+            echo 45.33.32.$ipTemp PORT: $port
             echo 45.33.32.$ipTemp PORT: $portTemp
+
+            echo BREAK
 
             # Add to the ipScanned pool
             ipScanned+=($ipTemp)
