@@ -24,27 +24,34 @@ ipTemp=0
 portScanned=()
 portTemp=0
 
-for ip in ${ipaddress[@]}; do
+for port in ${ports[@]}; do
 
-    if [[ ! ${ipScanned[@]} =~ "$ip" ]];
-    then
-        # Scan IP
-        echo 45.33.32.$ip
+    for ip in ${ipaddress[@]}; do
 
-        # Add to the ipScanned pool
-        ipScanned+=($ip)
+        if [[ ! ${ipScanned[@]} =~ "$ip" ]];
+        then
+            # Scan IP
+            echo 45.33.32.$ip PORT: $port
 
-        # Increment counter
-        ((ip+=1))
+            # Add to the ipScanned pool
+            ipScanned+=($ip)
 
-        # Store previous value and add 1 for the next execution
-        ipTemp=$[ip+1]
+            # Increment counter
+            ((ip+=1))
 
-        # Scan IP+1
-        echo 45.33.32.$ipTemp
+            # Store previous IP and add 1 for the next execution
+            ipTemp=$[ip+1]
 
-        # Add to the ipScanned pool
-        ipScanned+=($ipTemp)
-    fi
+            # Store previous IP and get the next Port for execution
+            portTemp=${ports[$port+1]}
+
+            # Scan IP+1
+            echo 45.33.32.$ipTemp PORT: $portTemp
+
+            # Add to the ipScanned pool
+            ipScanned+=($ipTemp)
+        fi
+
+    done
 
 done
