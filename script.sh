@@ -20,10 +20,10 @@ declare -a ports=(21 22 23 53 79 80 123)
 declare -a ipaddress=($(seq 0 1 255))
 
 declare -a ipScanned=()
-ipTemp=0
+secondIP=0
 
 declare -a portScanned=()
-portTemp=${ports[1]}
+secondPort=${ports[1]}
 
 for port in ${ports[@]}; do
     
@@ -33,7 +33,7 @@ for port in ${ports[@]}; do
         then
             # Scan IP
             echo 45.33.32.$ip PORT: $port
-            echo 45.33.32.$ip PORT: $portTemp
+            echo 45.33.32.$ip PORT: $secondPort
             
             # Add to the ipScanned pool
             ipScanned+=($ip)
@@ -42,14 +42,14 @@ for port in ${ports[@]}; do
             ((ip+=1))
             
             # Store previous IP and add 1 for the next execution
-            ipTemp=$[ip+1]
+            secondIP=$[ip+1]
             
             # Store previous IP and get the next Port for execution
-            portTemp=$[port+1]
+            secondPort=$[port+1]
             
             # Scan IP+1
-            echo 45.33.32.$ipTemp PORT: $port
-            echo 45.33.32.$ipTemp PORT: $portTemp
+            echo 45.33.32.$secondIP PORT: $port
+            echo 45.33.32.$secondIP PORT: $secondPort
             
             echo "-----------------------------------"
         fi
