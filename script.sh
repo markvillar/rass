@@ -15,54 +15,42 @@
 # nmap -p [21,22,23,53,79,80,123] 45.33.32.156 --scan-delay 500
 # nmap -sS -p [21,22,23,53,79,80,123] 45.33.32.156/32
 
-declare -a ports=(21, 22, 23, 53, 79, 80, 123)
+declare -a ports=(21, 22, 23)
+declare -a ipaddress=($(seq 0 1 10))
 
+scanned=()
+
+temp=0
+
+# Define Even IP Addresses
 evens=($(seq 0 2 255))
+# Define Odd IP Addresses
 odds=($(seq 1 2 255))
 
-for port in ${ports[@]}; do
 
-    for odd in ${odds[@]}; do
+for ip in ${ipaddress[@]}; do
 
-        nmap -v -sS -Pn -n -p $port 45.33.32.$odd
+    if [[ ! ${scanned[*]} =~ "$ip" ]];
+    then
+        echo 192.168.1.$ip
 
-        sleep 0.1
+        # Add to the scanned pool
+        scanned+=($ip)
 
-        nmap -v -sS -Pn -n -p $port 45.33.32.$odd
+        # Increment counter
+        ((ip+=1))
 
-        sleep 0.25
+        # Store previous value and add 1 for the next execution
+        temp=$[ip+1]
 
-    done
+        # Remove from the array
+        unset ipaddress[ip]
 
-    for even in ${evens[@]}; do
+        echo 192.168.1.$temp
 
-        nmap -v -sS -Pn -n -p $port 45.33.32.$even
+        scanned+=($temp)
 
-        sleep 0.1
-
-        nmap -v -sS -Pn -n -p $port 45.33.32.$even
-
-        sleep 0.25
-        
-    done
+        # echo "Scanned: ${scanned[@]}"
+    fi
 
 done
-
-
-# for i in {0..255}; do
-
-#     for port in ${ports[@]}; do
-
-#         nmap -v -sS -Pn -n -p $port 45.33.32.$i
-
-#         sleep 0.1
-
-#         nmap -v -sS -Pn -n -p $port 45.33.32.$i
-
-#         sleep 0.25
-
-#     done
-
-# done
-
-# nmap -v -sS -Pn -n -p [21,22,23,53,79,80,123] 45.33.32.156
