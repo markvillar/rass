@@ -1,5 +1,5 @@
 #!/usr/local/bin/bash
-# 
+#
 # 192.168.3.0/24
 # TCP Ports 21, 22, 23, 53, 79, 80, 123
 #
@@ -9,7 +9,7 @@
 # -sS TCP SYN/Connect()/ACK/Window/Maimon scans
 # --min-parallelism/max-parallelism <numprobes>: Probe parallelization
 # -vV Double Verbose
-# 
+#
 # --scan-delay/--max-scan-delay <time>: Adjust delay between probes
 
 # nmap -p [21,22,23,53,79,80,123] 45.33.32.156 --scan-delay 500
@@ -26,37 +26,34 @@ declare -a portScanned=()
 portTemp=${ports[1]}
 
 for port in ${ports[@]}; do
-
+    
     for ip in ${ipaddress[@]}; do
-
+        
         if [[ ! ${ipScanned[@]} =~ "$ip" ]];
         then
             # Scan IP
             echo 45.33.32.$ip PORT: $port
             echo 45.33.32.$ip PORT: $portTemp
-
+            
             # Add to the ipScanned pool
             ipScanned+=($ip)
-
+            
             # Increment counter
             ((ip+=1))
-
+            
             # Store previous IP and add 1 for the next execution
             ipTemp=$[ip+1]
-
+            
             # Store previous IP and get the next Port for execution
             portTemp=$[port+1]
-
+            
             # Scan IP+1
             echo 45.33.32.$ipTemp PORT: $port
             echo 45.33.32.$ipTemp PORT: $portTemp
-
+            
             echo "-----------------------------------"
-
-            # Add to the ipScanned pool
-            ipScanned+=($ipTemp)
         fi
-
+        
     done
-
+    
 done
