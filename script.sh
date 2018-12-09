@@ -16,7 +16,7 @@
 # nmap -sS -p [21,22,23,53,79,80,123] 45.33.32.156/32
 
 declare -a ports=(21, 22, 23, 53, 79, 80, 123)
-declare -a ipaddress=($(seq 0 1 255))
+declare -a ipaddress=($(seq 0 1 20))
 
 ipScanned=()
 ipTemp=0
