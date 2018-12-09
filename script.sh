@@ -18,34 +18,32 @@
 declare -a ports=(21, 22, 23, 53, 79, 80, 123)
 declare -a ipaddress=($(seq 0 1 255))
 
-scanned=()
-temp=0
+ipScanned=()
+ipTemp=0
+
+portScanned=()
+portTemp=0
 
 for ip in ${ipaddress[@]}; do
 
-    if [[ ! ${scanned[*]} =~ "$ip" ]];
+    if [[ ! ${ipScanned[@]} =~ "$ip" ]];
     then
-
         # Scan ip
-        nmap -v -sS -p $port 45.33.32.$ip
+        echo 45.33.32.$ip
 
-        # Add to the scanned pool
-        scanned+=($ip)
+        # Add to the ipScanned pool
+        ipScanned+=($ip)
 
         # Increment counter
         ((ip+=1))
 
         # Store previous value and add 1 for the next execution
-        temp=$[ip+1]
-
-        # Remove from the array
-        unset ipaddress[ip]
+        ipTemp=$[ip+1]
 
         # Scan ip+1
-        nmap -v -sS -p $port 45.33.32.$temp
+        echo 45.33.32.$ipTemp
 
-        scanned+=($temp)
-
+        ipScanned+=($ipTemp)
     fi
 
 done
