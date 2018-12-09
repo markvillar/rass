@@ -33,7 +33,7 @@ for ip in ${ipaddress[@]}; do
     if [[ ! ${scanned[*]} =~ "$ip" ]];
     then
 
-        # First Scan
+        # Scan ip
         nmap -v -sS -p $port 45.33.32.$ip
 
         # Add to the scanned pool
@@ -48,11 +48,11 @@ for ip in ${ipaddress[@]}; do
         # Remove from the array
         unset ipaddress[ip]
 
-        # Second Scan
+        # Scan ip+1
         nmap -v -sS -p $port 45.33.32.$temp
 
         scanned+=($temp)
-        
+
     fi
 
 done
