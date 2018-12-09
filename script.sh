@@ -28,7 +28,7 @@ for ip in ${ipaddress[@]}; do
 
     if [[ ! ${ipScanned[@]} =~ "$ip" ]];
     then
-        # Scan ip
+        # Scan IP
         echo 45.33.32.$ip
 
         # Add to the ipScanned pool
@@ -40,9 +40,10 @@ for ip in ${ipaddress[@]}; do
         # Store previous value and add 1 for the next execution
         ipTemp=$[ip+1]
 
-        # Scan ip+1
+        # Scan IP+1
         echo 45.33.32.$ipTemp
 
+        # Add to the ipScanned pool
         ipScanned+=($ipTemp)
     fi
 
