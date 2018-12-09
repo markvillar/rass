@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 # 
 # 192.168.3.0/24
 # TCP Ports 21, 22, 23, 53, 79, 80, 123
@@ -14,36 +14,49 @@
 
 # nmap -p [21,22,23,53,79,80,123] 45.33.32.156 --scan-delay 500
 # nmap -sS -p [21,22,23,53,79,80,123] 45.33.32.156/32
+# echo $BASH_VERSION
 
-declare -a ports=(21, 22, 23, 53, 79, 80, 123)
+declare -a ports=(21 22 23 53 79 80 123)
 declare -a ipaddress=($(seq 0 1 255))
 
-ipScanned=()
+declare -a ipScanned=()
 ipTemp=0
 
-portScanned=()
-portTemp=0
+declare -a portScanned=()
+portTemp=${ports[1]}
 
-for ip in ${ipaddress[@]}; do
+for port in ${ports[@]}; do
 
-    if [[ ! ${ipScanned[@]} =~ "$ip" ]];
-    then
-        # Scan ip
-        echo 45.33.32.$ip
+    for ip in ${ipaddress[@]}; do
 
-        # Add to the ipScanned pool
-        ipScanned+=($ip)
+        if [[ ! ${ipScanned[@]} =~ "$ip" ]];
+        then
+            # Scan IP
+            echo 45.33.32.$ip PORT: $port
+            echo 45.33.32.$ip PORT: $portTemp
 
-        # Increment counter
-        ((ip+=1))
+            # Add to the ipScanned pool
+            ipScanned+=($ip)
 
-        # Store previous value and add 1 for the next execution
-        ipTemp=$[ip+1]
+            # Increment counter
+            ((ip+=1))
 
-        # Scan ip+1
-        echo 45.33.32.$ipTemp
+            # Store previous IP and add 1 for the next execution
+            ipTemp=$[ip+1]
 
-        ipScanned+=($ipTemp)
-    fi
+            # Store previous IP and get the next Port for execution
+            portTemp=$[port+1]
+
+            # Scan IP+1
+            echo 45.33.32.$ipTemp PORT: $port
+            echo 45.33.32.$ipTemp PORT: $portTemp
+
+            echo "-----------------------------------"
+
+            # Add to the ipScanned pool
+            ipScanned+=($ipTemp)
+        fi
+
+    done
 
 done
