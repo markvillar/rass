@@ -18,10 +18,10 @@
 declare -a ports=(21, 22, 23, 53, 79, 80, 123)
 declare -a ipaddress=($(seq 0 1 20))
 
-ipScanned=()
+declare -a ipScanned=()
 ipTemp=0
 
-portScanned=()
+declare -a portScanned=()
 portTemp=${ports[1]}
 
 for port in ${ports[@]}; do
