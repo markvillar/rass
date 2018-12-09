@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/local/bin/bash
 # 
 # 192.168.3.0/24
 # TCP Ports 21, 22, 23, 53, 79, 80, 123
