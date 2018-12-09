@@ -14,6 +14,7 @@
 
 # nmap -p [21,22,23,53,79,80,123] 45.33.32.156 --scan-delay 500
 # nmap -sS -p [21,22,23,53,79,80,123] 45.33.32.156/32
+# echo $BASH_VERSION
 
 declare -a ports=(21, 22, 23, 53, 79, 80, 123)
 declare -a ipaddress=($(seq 0 1 20))
