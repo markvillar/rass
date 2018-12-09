@@ -29,7 +29,7 @@ for port in ${ports[@]}; do
     
     for ip in ${ipaddress[@]}; do
         
-        if [[ ! ${ipScanned[@]} =~ "$ip" ]];
+        if [[ ! ${ipScanned[@]} =~ $ip ]];
         then
             # Scan IP
             echo 45.33.32.$ip PORT: $port
