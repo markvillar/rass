@@ -17,7 +17,7 @@
 # echo $BASH_VERSION
 
 declare -a ports=(21 22 23 53 79 80 123)
-declare -a ipaddress=($(seq 0 1 1))
+declare -a ipaddress=($(seq 0 1 255))
 
 declare -a ipScanned=()
 ipTemp=0
